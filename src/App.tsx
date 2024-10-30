@@ -118,12 +118,12 @@ function App() {
     const generatedContent = `
       <div class="min-h-screen bg-gray-50">
         <!-- Hero Section -->
-        <header class="bg-blue-600 text-white py-12">
+        <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
           <div class="max-w-6xl mx-auto px-4">
             <div class="text-center">
-              <p class="text-sm uppercase tracking-wider mb-4">Attn: ${formData.currentIdentityPlural}, Ignite Your Recruiting Power!</p>
+              <p class="text-sm uppercase tracking-wider mb-4">Attention ${formData.currentIdentityPlural}!</p>
               <h1 class="text-4xl md:text-5xl font-bold mb-6">${formData.productTitle}</h1>
-              <p class="text-xl md:text-2xl mb-8">${formData.benefit1}</p>
+              <p class="text-xl md:text-2xl mb-8">Discover How to ${formData.mainResult} Without ${formData.painToAvoid}</p>
               <div class="max-w-3xl mx-auto">
                 <p class="text-lg opacity-90">${formData.productDescription}</p>
               </div>
@@ -136,37 +136,51 @@ function App() {
           <!-- Author Introduction -->
           <div class="text-center mb-16">
             <p class="text-sm text-blue-600 mb-2">From the Desk of ${formData.name}</p>
+            <div class="mb-4">
+              <p class="text-gray-700 italic">${formData.qualifications}</p>
+            </div>
             <p class="text-gray-600 italic mb-6">Dear Fellow ${formData.currentIdentity},</p>
             <div class="prose max-w-3xl mx-auto">
               <p class="text-lg leading-relaxed">
-                While the pursuit of ${formData.painToAvoid} may seem urgent, true success in network marketing 
-                comes from mastering ${formData.focus1} and ${formData.focus2}.
+                If you're tired of ${formData.painToAvoid} and ready to finally ${formData.mainResult}, 
+                then this will be the most important message you read today.
               </p>
             </div>
           </div>
 
           <!-- Pain Points Section -->
           <div class="bg-gray-50 rounded-xl p-8 mb-16">
-            <h2 class="text-2xl font-bold mb-6 text-center">Here's what most ${formData.currentIdentityPlural} think will solve the problem, but it won't...</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center">The 3 Biggest Challenges Every ${formData.currentIdentity} Faces...</h2>
             <div class="grid md:grid-cols-3 gap-8">
               <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h3 class="font-semibold mb-3">${formData.problem1}</h3>
-                <p class="text-gray-600">${formData.pain1}</p>
+                <p class="text-gray-600">${formData.painPoint1}</p>
               </div>
               <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h3 class="font-semibold mb-3">${formData.problem2}</h3>
-                <p class="text-gray-600">${formData.pain2}</p>
+                <p class="text-gray-600">${formData.painPoint2}</p>
               </div>
               <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h3 class="font-semibold mb-3">${formData.problem3}</h3>
-                <p class="text-gray-600">${formData.pain3}</p>
+                <p class="text-gray-600">${formData.painPoint3}</p>
               </div>
+            </div>
+          </div>
+
+          <!-- Questions Section -->
+          <div class="mb-16">
+            <h2 class="text-2xl font-bold text-center mb-8">Ask Yourself...</h2>
+            <div class="space-y-4">
+              <p class="text-lg">• ${formData.question1}</p>
+              <p class="text-lg">• ${formData.question2}</p>
+              <p class="text-lg">• ${formData.question3}</p>
             </div>
           </div>
 
           <!-- Benefits Section -->
           <div class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-12">Transform Your Network Marketing Journey</h2>
+            <h2 class="text-3xl font-bold text-center mb-12">Introducing ${formData.productTitle}</h2>
+            <p class="text-center mb-8">The complete ${formData.productType} designed to help you:</p>
             <div class="grid md:grid-cols-3 gap-8">
               <div class="text-center">
                 <h3 class="text-xl font-semibold mb-4">${formData.benefit1}</h3>
@@ -183,10 +197,20 @@ function App() {
             </div>
           </div>
 
+          <!-- Bottom Line Results -->
+          <div class="bg-gray-50 rounded-xl p-8 mb-16">
+            <h2 class="text-2xl font-bold text-center mb-8">Here's What This Means For You...</h2>
+            <div class="space-y-6">
+              <p class="text-lg">✓ ${formData.bottomLineResult1}</p>
+              <p class="text-lg">✓ ${formData.bottomLineResult2}</p>
+              <p class="text-lg">✓ ${formData.bottomLineResult3}</p>
+            </div>
+          </div>
+
           <!-- Call to Action -->
           <div class="text-center">
-            <button class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">
-              Get Started Now
+            <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-colors">
+              Yes! I'm Ready To ${formData.longTermDesire1}
             </button>
             <p class="mt-4 text-sm text-gray-600">Join other successful ${formData.currentIdentityPlural} who have transformed their business</p>
           </div>
