@@ -207,21 +207,23 @@ function App() {
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <AIStarter 
-          onGenerate={handleGenerateContent} 
-          loading={loading}
-          error={error}
-        />
-        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Form Column */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <AvatarForm
-              data={formData}
-              onChange={handleFormChange}
-              onRegenerate={handleRedoContent}
-              loading={fieldLoading}
+          {/* Form Column - Now with AIStarter at the top */}
+          <div>
+            <AIStarter 
+              onGenerate={handleGenerateContent} 
+              loading={loading}
+              error={error}
             />
+            
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <AvatarForm
+                data={formData}
+                onChange={handleFormChange}
+                onRegenerate={handleRedoContent}
+                loading={fieldLoading}
+              />
+            </div>
           </div>
 
           {/* Preview Column */}
