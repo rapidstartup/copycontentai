@@ -5,6 +5,7 @@ import AIStarter from './components/AIStarter';
 import AvatarForm from './components/AvatarForm';
 import { FormData } from './types/form';
 import { generateCopy, regenerateField } from './lib/openai';
+import { Loader2, Wand2, AlertCircle } from 'lucide-react';
 
 const initialFormData: FormData = {
   productDescription: '',
@@ -207,15 +208,67 @@ function App() {
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header Section - Spans both columns */}
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Sales Letter Genie</h2>
+          <div className="space-y-4 mb-6">
+            <p>Here's how to create your perfect sales letter:</p>
+            <ol className="list-decimal list-inside space-y-2 ml-4">
+              <li>Load your avatar</li>
+              <li>Fill out the rest of the form</li>
+              <li>Hit the Genie button in each section</li>
+              <li>Download your sales letter</li>
+              <li>Polish it up... and go make sales!</li>
+            </ol>
+            <p className="text-gray-600">
+              No more struggling with sales copy. No more hours of manual writing. Create compelling sales letters based
+              on your avatar in minutes!
+            </p>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Form Column - Now with AIStarter at the top */}
+          {/* Form Column */}
           <div>
-            <AIStarter 
-              onGenerate={handleGenerateContent} 
-              loading={loading}
-              error={error}
-            />
-            
+            {/* AI Generate Section */}
+            <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+              <p className="text-sm text-gray-600 mb-4">
+                Need help filling out this form? Tell me about your product and target audience, and I'll help you get started.
+              </p>
+              <div className="relative">
+                <textarea
+                  className="w-full h-32 p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Example: I'm selling a comprehensive network marketing training program that helps busy moms build their downline without sacrificing family time..."
+                  value={formData.productDescription}
+                  onChange={(e) => handleFormChange({ productDescription: e.target.value })}
+                />
+                <button
+                  onClick={() => handleGenerateContent(formData.productDescription)}
+                  disabled={loading || !formData.productDescription.trim()}
+                  className="absolute right-2 bottom-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Generating...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Wand2 className="w-5 h-5" />
+                      <span>Generate</span>
+                    </>
+                  )}
+                </button>
+              </div>
+              {error && (
+                <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
+                  <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-red-600">{error}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Avatar Form */}
             <div className="bg-white rounded-lg shadow-sm p-6">
               <AvatarForm
                 data={formData}
