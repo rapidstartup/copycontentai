@@ -218,7 +218,6 @@ function App() {
       </div>
     `;
     setContent(generatedContent);
-    setShowPreview(true);
   };
 
   return (
