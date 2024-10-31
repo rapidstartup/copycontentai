@@ -6,6 +6,7 @@ import AvatarForm from './components/AvatarForm';
 import { FormData } from './types/form';
 import { generateCopy, regenerateField } from './lib/openai';
 import { Loader2, Wand2, AlertCircle } from 'lucide-react';
+import { generateVSLContent } from './lib/vslFramework';
 
 const initialFormData: FormData = {
   productDescription: '',
@@ -114,110 +115,84 @@ function App() {
     }));
   };
 
-  const handleGeneratePage = () => {
-    const generatedContent = `
-      <div class="min-h-screen bg-gray-50">
-        <!-- Hero Section -->
-        <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-          <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center">
-              <p class="text-sm uppercase tracking-wider mb-4">Attention ${formData.currentIdentityPlural}!</p>
-              <h1 class="text-4xl md:text-5xl font-bold mb-6">${formData.productTitle}</h1>
-              <p class="text-xl md:text-2xl mb-8">Discover How to ${formData.result1} Without ${formData.painToAvoid}</p>
-              <div class="max-w-3xl mx-auto">
-                <p class="text-lg opacity-90">${formData.productDescription}</p>
+  const handleGeneratePage = async () => {
+    try {
+      setError(null);
+      setLoading(true);
+      
+      // Generate the VSL content
+      const vslContent = await generateVSLContent(formData);
+      
+      // Create the page HTML
+      const generatedContent = `
+        <div class="min-h-screen bg-gray-50">
+          <!-- Hero Section -->
+          <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+            <div class="max-w-6xl mx-auto px-4">
+              <div class="text-center">
+                <p class="text-sm uppercase tracking-wider mb-4">${vslContent.grabber}</p>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">${vslContent.mainHeadline}</h1>
+                <p class="text-xl md:text-2xl mb-8">${vslContent.subHeadline}</p>
               </div>
             </div>
-          </div>
-        </header>
+          </header>
 
-        <!-- Main Content -->
-        <main class="max-w-6xl mx-auto px-4 py-16">
-          <!-- Author Introduction -->
-          <div class="text-center mb-16">
-            <p class="text-sm text-blue-600 mb-2">From the Desk of ${formData.name}</p>
-            <div class="mb-4">
-              <p class="text-gray-700 italic">${formData.qualifications}</p>
+          <!-- Main Content -->
+          <main class="max-w-6xl mx-auto px-4 py-16">
+            <!-- Opener -->
+            <div class="prose max-w-3xl mx-auto mb-16">
+              ${vslContent.opener}
             </div>
-            <p class="text-gray-600 italic mb-6">Dear Fellow ${formData.currentIdentity},</p>
+
+            <!-- Story -->
+            <div class="prose max-w-3xl mx-auto mb-16">
+              ${vslContent.story}
+            </div>
+
+            <!-- Transition -->
+            <div class="prose max-w-3xl mx-auto mb-16">
+              ${vslContent.transition}
+            </div>
+
+            <!-- Solution -->
+            <div class="prose max-w-3xl mx-auto mb-16">
+              ${vslContent.solution}
+            </div>
+
+            <!-- Benefits -->
+            <div class="prose max-w-3xl mx-auto mb-16">
+              ${vslContent.benefits}
+            </div>
+
+            <!-- Proof -->
+            <div class="prose max-w-3xl mx-auto mb-16">
+              ${vslContent.proof}
+            </div>
+
+            <!-- Offer -->
+            <div class="prose max-w-3xl mx-auto mb-16">
+              ${vslContent.offer}
+            </div>
+
+            <!-- Close -->
+            <div class="prose max-w-3xl mx-auto mb-16">
+              ${vslContent.close}
+            </div>
+
+            <!-- P.S. -->
             <div class="prose max-w-3xl mx-auto">
-              <p class="text-lg leading-relaxed">
-                If you're tired of ${formData.painToAvoid} and ready to finally ${formData.result1}, 
-                then this will be the most important message you read today.
-              </p>
+              ${vslContent.ps}
             </div>
-          </div>
-
-          <!-- Pain Points Section -->
-          <div class="bg-gray-50 rounded-xl p-8 mb-16">
-            <h2 class="text-2xl font-bold mb-6 text-center">The 3 Biggest Challenges Every ${formData.currentIdentity} Faces...</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-              <div class="bg-white p-6 rounded-lg shadow-sm">
-                <h3 class="font-semibold mb-3">${formData.problem1}</h3>
-                <p class="text-gray-600">${formData.pain1}</p>
-              </div>
-              <div class="bg-white p-6 rounded-lg shadow-sm">
-                <h3 class="font-semibold mb-3">${formData.problem2}</h3>
-                <p class="text-gray-600">${formData.pain2}</p>
-              </div>
-              <div class="bg-white p-6 rounded-lg shadow-sm">
-                <h3 class="font-semibold mb-3">${formData.problem3}</h3>
-                <p class="text-gray-600">${formData.pain3}</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Questions Section -->
-          <div class="mb-16">
-            <h2 class="text-2xl font-bold text-center mb-8">Ask Yourself...</h2>
-            <div class="space-y-4">
-              <p class="text-lg">• ${formData.question1}</p>
-              <p class="text-lg">• ${formData.question2}</p>
-              <p class="text-lg">• ${formData.question3}</p>
-            </div>
-          </div>
-
-          <!-- Benefits Section -->
-          <div class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-12">Introducing ${formData.productTitle}</h2>
-            <p class="text-center mb-8">The complete ${formData.productType} designed to help you:</p>
-            <div class="grid md:grid-cols-3 gap-8">
-              <div class="text-center">
-                <h3 class="text-xl font-semibold mb-4">${formData.benefit1}</h3>
-                <p class="text-gray-600">${formData.immediateResult1}</p>
-              </div>
-              <div class="text-center">
-                <h3 class="text-xl font-semibold mb-4">${formData.benefit2}</h3>
-                <p class="text-gray-600">${formData.immediateResult2}</p>
-              </div>
-              <div class="text-center">
-                <h3 class="text-xl font-semibold mb-4">${formData.benefit3}</h3>
-                <p class="text-gray-600">${formData.immediateResult3}</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom Line Results -->
-          <div class="bg-gray-50 rounded-xl p-8 mb-16">
-            <h2 class="text-2xl font-bold text-center mb-8">Here's What This Means For You...</h2>
-            <div class="space-y-6">
-              <p class="text-lg">✓ ${formData.bottomLine1}</p>
-              <p class="text-lg">✓ ${formData.bottomLine2}</p>
-              <p class="text-lg">✓ ${formData.bottomLine3}</p>
-            </div>
-          </div>
-
-          <!-- Call to Action -->
-          <div class="text-center">
-            <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-colors">
-              Yes! I'm Ready To ${formData.desire1}
-            </button>
-            <p class="mt-4 text-sm text-gray-600">Join other successful ${formData.currentIdentityPlural} who have transformed their business</p>
-          </div>
-        </main>
-      </div>
-    `;
-    setContent(generatedContent);
+          </main>
+        </div>
+      `;
+      
+      setContent(generatedContent);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Failed to generate page content');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
