@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import { FormData } from '../types/form';
 
-const getOpenAIClient = () => {
+export const getOpenAIClient = () => {
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
   
   if (!apiKey || apiKey === 'your-api-key-here') {
@@ -131,9 +131,9 @@ export async function regenerateField(field: keyof FormData, currentData: FormDa
     const openai = getOpenAIClient();
     
     const prompt = `Based on this context about a network marketing product/service:
-    Current Identity: ${currentData.currentIdentity}
-    Ideal Identity: ${currentData.idealIdentity}
-    Pain Points: ${currentData.pain1}, ${currentData.pain2}, ${currentData.pain3}
+    Current Identity: ${currentData.avatarCurrentIdentity}
+    Ideal Identity: ${currentData.avatarIdealIdentity}
+    Pain Points: ${currentData.painPoint1}, ${currentData.painPoint2}, ${currentData.painPoint3}
     
     Please generate new, specific content for the field: "${field}"
     Make it compelling and tailored to network marketers and their goals.

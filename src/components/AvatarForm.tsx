@@ -319,10 +319,10 @@ const AvatarForm: React.FC<AvatarFormProps> = ({
         <FormSection
           key={section.title}
           title={section.title}
-          fields={section.fields}
+          fields={section.fields as { id: keyof FormData; label: string; placeholder?: string; example?: string; type?: 'textarea' | 'text' | 'array' }[]}
           values={data}
           onChange={handleChange}
-          onRegenerate={onRegenerate}
+          onRegenerate={(field: string) => onRegenerate(field as keyof FormData)}
           loading={loading}
         />
       ))}

@@ -33,14 +33,14 @@ export async function generateVSLContent(formData: FormData): Promise<VSLSection
           content: `Context about the product/service:
             Product Title: ${formData.productTitle}
             Product Type: ${formData.productType}
-            Target Audience: ${formData.currentIdentity} (${formData.currentIdentityPlural})
+            Target Audience: ${formData.avatarCurrentIdentity} (${formData.avatarCurrentIdentityPlural})
             Main Pain Point: ${formData.painToAvoid}
-            Main Result: ${formData.result1}
+            Main Result: ${formData.mainResult}
             Benefits: ${formData.benefit1}, ${formData.benefit2}, ${formData.benefit3}
             Problems: ${formData.problem1}, ${formData.problem2}, ${formData.problem3}
-            Pain Points: ${formData.pain1}, ${formData.pain2}, ${formData.pain3}
+            Pain Points: ${formData.painPoint1}, ${formData.painPoint2}, ${formData.painPoint3}
             Immediate Results: ${formData.immediateResult1}, ${formData.immediateResult2}, ${formData.immediateResult3}
-            Bottom Line Results: ${formData.bottomLine1}, ${formData.bottomLine2}, ${formData.bottomLine3}
+            Bottom Line Results: ${formData.bottomLineResult1}, ${formData.bottomLineResult2}, ${formData.bottomLineResult3}
             
             ${prompt}
             
