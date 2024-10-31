@@ -123,7 +123,7 @@ function App() {
             <div class="text-center">
               <p class="text-sm uppercase tracking-wider mb-4">Attention ${formData.currentIdentityPlural}!</p>
               <h1 class="text-4xl md:text-5xl font-bold mb-6">${formData.productTitle}</h1>
-              <p class="text-xl md:text-2xl mb-8">Discover How to ${formData.mainResult} Without ${formData.painToAvoid}</p>
+              <p class="text-xl md:text-2xl mb-8">Discover How to ${formData.result1} Without ${formData.painToAvoid}</p>
               <div class="max-w-3xl mx-auto">
                 <p class="text-lg opacity-90">${formData.productDescription}</p>
               </div>
@@ -142,7 +142,7 @@ function App() {
             <p class="text-gray-600 italic mb-6">Dear Fellow ${formData.currentIdentity},</p>
             <div class="prose max-w-3xl mx-auto">
               <p class="text-lg leading-relaxed">
-                If you're tired of ${formData.painToAvoid} and ready to finally ${formData.mainResult}, 
+                If you're tired of ${formData.painToAvoid} and ready to finally ${formData.result1}, 
                 then this will be the most important message you read today.
               </p>
             </div>
@@ -154,15 +154,15 @@ function App() {
             <div class="grid md:grid-cols-3 gap-8">
               <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h3 class="font-semibold mb-3">${formData.problem1}</h3>
-                <p class="text-gray-600">${formData.painPoint1}</p>
+                <p class="text-gray-600">${formData.pain1}</p>
               </div>
               <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h3 class="font-semibold mb-3">${formData.problem2}</h3>
-                <p class="text-gray-600">${formData.painPoint2}</p>
+                <p class="text-gray-600">${formData.pain2}</p>
               </div>
               <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h3 class="font-semibold mb-3">${formData.problem3}</h3>
-                <p class="text-gray-600">${formData.painPoint3}</p>
+                <p class="text-gray-600">${formData.pain3}</p>
               </div>
             </div>
           </div>
@@ -201,16 +201,16 @@ function App() {
           <div class="bg-gray-50 rounded-xl p-8 mb-16">
             <h2 class="text-2xl font-bold text-center mb-8">Here's What This Means For You...</h2>
             <div class="space-y-6">
-              <p class="text-lg">✓ ${formData.bottomLineResult1}</p>
-              <p class="text-lg">✓ ${formData.bottomLineResult2}</p>
-              <p class="text-lg">✓ ${formData.bottomLineResult3}</p>
+              <p class="text-lg">✓ ${formData.bottomLine1}</p>
+              <p class="text-lg">✓ ${formData.bottomLine2}</p>
+              <p class="text-lg">✓ ${formData.bottomLine3}</p>
             </div>
           </div>
 
           <!-- Call to Action -->
           <div class="text-center">
             <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-colors">
-              Yes! I'm Ready To ${formData.longTermDesire1}
+              Yes! I'm Ready To ${formData.desire1}
             </button>
             <p class="mt-4 text-sm text-gray-600">Join other successful ${formData.currentIdentityPlural} who have transformed their business</p>
           </div>
